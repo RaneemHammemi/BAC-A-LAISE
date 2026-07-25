@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STI - Résumés PDF</title>
+    <link rel="stylesheet" href="subjetcstyle.css" />
+    <!-- FontAwesome for modern icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Return
+      </a>
+      <h1 class="nav-title">STI</h1>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un chapitre..."
+          onkeyup="filterPDFs()"
+        />
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-layout fade-in">
+      <!-- Sidebar: PDF Chapters List -->
+      <aside class="pdf-sidebar">
+        <div class="sidebar-header">
+          <!-- Animated Logo in Left Sidebar -->
+          <div class="sidebar-logo">
+            <div class="code-logo-icon anim-orbit">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h3>Chapitres & Résumés</h3>
+          </div>
+        </div>
+
+        <div class="pdf-list" id="pdfList">
+          <!-- Unit 1 -->
+          <div class="unit-group">
+            <span class="unit-label">Résumé</span>
+
+            <button
+              class="pdf-item active"
+              onclick="loadPDF('pdf/sti.pdf', 'Résumé STI', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Résumé STI</span>
+                <span class="pdf-size">PDF • 1.2 MB</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content: PDF Viewer Header + Embed -->
+      <main class="viewer-container">
+        <div class="viewer-header">
+          <h2 id="currentTitle">Résumé STI</h2>
+          <div class="viewer-actions">
+            <a id="downloadBtn" href="pdf/sti.pdf" download class="action-btn">
+              <i class="fa-solid fa-download"></i> Télécharger
+            </a>
+            <a
+              id="fullscreenBtn"
+              href="pdf/sti.pdf"
+              target="_blank"
+              class="action-btn secondary"
+            >
+              <i class="fa-solid fa-expand"></i> Plein écran
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded PDF Viewer -->
+        <div class="iframe-wrapper">
+          <iframe id="pdfFrame" src="pdf/sti.pdf" frameborder="0"></iframe>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Load dynamic PDF into viewer with smooth transition
+      function loadPDF(pdfUrl, title, element) {
+        const frame = document.getElementById("pdfFrame");
+
+        frame.style.opacity = "0";
+        frame.style.transform = "scale(0.98)";
+
+        setTimeout(() => {
+          frame.src = pdfUrl;
+          document.getElementById("currentTitle").textContent = title;
+          document.getElementById("downloadBtn").href = pdfUrl;
+          document.getElementById("fullscreenBtn").href = pdfUrl;
+
+          frame.style.opacity = "1";
+          frame.style.transform = "scale(1)";
+        }, 200);
+
+        // Update active state in sidebar
+        let items = document.querySelectorAll(".pdf-item");
+        items.forEach((item) => item.classList.remove("active"));
+        element.classList.add("active");
+      }
+
+      // Filter PDFs via search input
+      function filterPDFs() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let pdfItems = document.querySelectorAll(".pdf-item");
+
+        pdfItems.forEach((item) => {
+          let text = item.querySelector(".pdf-name").textContent.toLowerCase();
+          if (text.includes(input)) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

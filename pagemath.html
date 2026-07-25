@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathématiques - Résumés PDF</title>
+    <link rel="stylesheet" href="subjetcstyle.css" />
+    <!-- FontAwesome for modern icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Return
+      </a>
+      <h1 class="nav-title">Mathématiques</h1>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un chapitre..."
+          onkeyup="filterPDFs()"
+        />
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-layout fade-in">
+      <!-- Sidebar: PDF Chapters List -->
+      <aside class="pdf-sidebar">
+        <div class="sidebar-header">
+          <!-- Animated Logo in Left Sidebar Header -->
+          <div class="sidebar-logo">
+            <div class="code-logo-icon anim-orbit">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <h3>Chapitres & Résumés</h3>
+          </div>
+        </div>
+
+        <div class="pdf-list" id="pdfList">
+          <!-- Unit 1 -->
+          <div class="unit-group">
+            <span class="unit-label">Résumés</span>
+
+            <button
+              class="pdf-item active"
+              onclick="loadPDF('pdf/comp.pdf', 'Nombres Complexes', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Nombres Complexes</span>
+                <span class="pdf-size">PDF • 1.2 MB</span>
+              </div>
+            </button>
+
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/suites.pdf', 'Suites Numériques', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Suites Numériques</span>
+                <span class="pdf-size">PDF • 850 KB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/matrice.pdf', 'Matrices', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Matrices </span>
+                <span class="pdf-size">PDF • 850 KB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/proba.pdf', 'Probabilité', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Probabilité</span>
+                <span class="pdf-size">PDF • 2.4 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/prim.pdf', 'Primitives', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Primitives</span>
+                <span class="pdf-size">PDF • 1.4 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/stat.pdf', 'Statistiques', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Statistiques</span>
+                <span class="pdf-size">PDF • 1.3 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/log.pdf', 'Logarithme', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Logarithme</span>
+                <span class="pdf-size">PDF • 2.5 MB</span>
+              </div>
+            </button>
+
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/limites.pdf', 'Limites', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Limites</span>
+                <span class="pdf-size">PDF • 0.5 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/deriv.pdf', 'Dérivation', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Dérivation</span>
+                <span class="pdf-size">PDF • 0.5 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/expo.pdf', 'Exponentielle', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Exponentielle</span>
+                <span class="pdf-size">PDF • 1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/integ.pdf', 'Intégrale', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Intégrale</span>
+                <span class="pdf-size">PDF • 1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/puis.pdf', 'Fonction Puissance', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Fonction Puissance</span>
+                <span class="pdf-size">PDF • 1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/autres.pdf', 'Autres', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Autres</span>
+                <span class="pdf-size">PDF • 1 MB</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content: PDF Viewer Header + Embed -->
+      <main class="viewer-container">
+        <div class="viewer-header">
+          <h2 id="currentTitle">Nombres Complexes</h2>
+          <div class="viewer-actions">
+            <a
+              id="downloadBtn"
+              href="pdf/comp.pdf"
+              download
+              class="action-btn"
+            >
+              <i class="fa-solid fa-download"></i> Télécharger
+            </a>
+            <a
+              id="fullscreenBtn"
+              href="pdf/comp.pdf"
+              target="_blank"
+              class="action-btn secondary"
+            >
+              <i class="fa-solid fa-expand"></i> Plein écran
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded PDF Viewer -->
+        <div class="iframe-wrapper">
+          <iframe
+            id="pdfFrame"
+            src="pdf/comp.pdf"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Load dynamic PDF into viewer with smooth transition
+      function loadPDF(pdfUrl, title, element) {
+        const frame = document.getElementById("pdfFrame");
+
+        frame.style.opacity = "0";
+        frame.style.transform = "scale(0.98)";
+
+        setTimeout(() => {
+          frame.src = pdfUrl;
+          document.getElementById("currentTitle").textContent = title;
+          document.getElementById("downloadBtn").href = pdfUrl;
+          document.getElementById("fullscreenBtn").href = pdfUrl;
+
+          frame.style.opacity = "1";
+          frame.style.transform = "scale(1)";
+        }, 200);
+
+        // Update active state in sidebar
+        let items = document.querySelectorAll(".pdf-item");
+        items.forEach((item) => item.classList.remove("active"));
+        element.classList.add("active");
+      }
+
+      // Filter PDFs via search input
+      function filterPDFs() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let pdfItems = document.querySelectorAll(".pdf-item");
+
+        pdfItems.forEach((item) => {
+          let text = item.querySelector(".pdf-name").textContent.toLowerCase();
+          if (text.includes(input)) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

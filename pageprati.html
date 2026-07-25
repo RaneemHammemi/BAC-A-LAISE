@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informatique - Code Viewer</title>
+    <link rel="stylesheet" href="subjetcstyle.css" />
+    <!-- FontAwesome for modern icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Prism.js CSS for Syntax Highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Return
+      </a>
+      <h1 class="nav-title">Informatique</h1>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un algorithme..."
+          onkeyup="filterCode()"
+        />
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-layout fade-in">
+      <!-- Sidebar: Code Snippets List -->
+      <aside class="pdf-sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-logo">
+            <div class="code-logo-icon anim-orbit">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3>Algorithmes & Code</h3>
+          </div>
+        </div>
+
+        <div class="pdf-list" id="codeList">
+          <!-- Unit 1: Algorithms -->
+          <div class="unit-group">
+            <span class="unit-label">Algorithmique</span>
+
+            <button
+              class="pdf-item active"
+              onclick="loadCode('tri_bulle', 'Tri à Bulles (Pascal / Python)', 'python', this)"
+            >
+              <i class="fa-solid fa-code-commit"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Tri à Bulles</span>
+                <span class="pdf-size">Python / Algo</span>
+              </div>
+            </button>
+
+            <button
+              class="pdf-item"
+              onclick="loadCode('recherche_dicho', 'Recherche Dichotomique', 'python', this)"
+            >
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Recherche Dichotomique</span>
+                <span class="pdf-size">Python / Algo</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Unit 2: SQL / Database -->
+          <div class="unit-group">
+            <span class="unit-label">Base de Données</span>
+
+            <button
+              class="pdf-item"
+              onclick="loadCode('req_sql', 'Requêtes SQL Récurrentes', 'sql', this)"
+            >
+              <i class="fa-solid fa-database"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Requêtes SQL Bac</span>
+                <span class="pdf-size">SQL</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content: Code Viewer Header + Read-Only Display -->
+      <main class="viewer-container">
+        <div class="viewer-header">
+          <div class="title-with-badge">
+            <h2 id="currentTitle">Tri à Bulles (Pascal / Python)</h2>
+            <span class="lang-badge" id="langBadge">PYTHON</span>
+          </div>
+          <div class="viewer-actions">
+            <button class="action-btn" onclick="copyCode()">
+              <i class="fa-solid fa-copy" id="copyIcon"></i>
+              <span id="copyText">Copier le code</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Read-Only Code Viewer Container -->
+        <div class="code-viewer-wrapper">
+          <pre><code class="language-python" id="codeBlock"></code></pre>
+        </div>
+      </main>
+    </div>
+
+    <!-- Prism.js JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+    <script>
+      // Code Repository
+      const codeData = {
+        tri_bulle: `def tri_a_bulles(T):
+    n = len(T)
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if T[j] > T[j + 1]:
+                T[j], T[j + 1] = T[j + 1], T[j]
+    return T
+
+# Exemple d'exécution
+T = [64, 34, 25, 12, 22, 11, 90]
+print("Tableau trié :", tri_a_bulles(T))`,
+
+        recherche_dicho: `def recherche_dichotomique(T, val):
+    deb = 0
+    fin = len(T) - 1
+    trouve = False
+    
+    while deb <= fin and not trouve:
+        mil = (deb + fin) // 2
+        if T[mil] == val:
+            trouve = True
+        elif val < T[mil]:
+            fin = mil - 1
+        else:
+            deb = mil + 1
+            
+    return mil if trouve else -1`,
+
+        req_sql: `-- Creation de la table Etudiant
+CREATE TABLE Etudiant (
+    num_inscription INT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    moyenne DECIMAL(4,2)
+);
+
+-- Selection des admis avec moyenne >= 10
+SELECT nom, prenom, moyenne 
+FROM Etudiant 
+WHERE moyenne >= 10 
+ORDER BY moyenne DESC;`
+      };
+
+      // Load snippet into viewer with smooth transition
+      function loadCode(key, title, lang, element) {
+        const wrapper = document.querySelector('.code-viewer-wrapper');
+        const codeBlock = document.getElementById('codeBlock');
+        const langBadge = document.getElementById('langBadge');
+
+        wrapper.style.opacity = '0';
+        wrapper.style.transform = 'scale(0.98)';
+
+        setTimeout(() => {
+          codeBlock.className = `language-${lang}`;
+          codeBlock.textContent = codeData[key] || '// Aucun code disponible';
+          
+          document.getElementById('currentTitle').textContent = title;
+          langBadge.textContent = lang.toUpperCase();
+
+          // Re-trigger syntax highlighting
+          Prism.highlightElement(codeBlock);
+
+          wrapper.style.opacity = '1';
+          wrapper.style.transform = 'scale(1)';
+        }, 200);
+
+        // Update active menu tab
+        document.querySelectorAll('.pdf-item').forEach((item) => item.classList.remove('active'));
+        element.classList.add('active');
+      }
+
+      // Copy snippet functionality
+      function copyCode() {
+        const codeText = document.getElementById('codeBlock').textContent;
+        navigator.clipboard.writeText(codeText).then(() => {
+          const textSpan = document.getElementById('copyText');
+          const icon = document.getElementById('copyIcon');
+
+          textSpan.textContent = 'Copié !';
+          icon.className = 'fa-solid fa-check';
+
+          setTimeout(() => {
+            textSpan.textContent = 'Copier le code';
+            icon.className = 'fa-solid fa-copy';
+          }, 2000);
+        });
+      }
+
+      // Filter snippets in sidebar
+      function filterCode() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let items = document.querySelectorAll('.pdf-item');
+
+        items.forEach((item) => {
+          let text = item.querySelector('.pdf-name').textContent.toLowerCase();
+          item.style.display = text.includes(input) ? 'flex' : 'none';
+        });
+      }
+
+      // Initialize default snippet on load
+      window.addEventListener('DOMContentLoaded', () => {
+        loadCode('tri_bulle', 'Tri à Bulles (Pascal / Python)', 'python', document.querySelector('.pdf-item.active'));
+      });
+    </script>
+  </body>
+</html>

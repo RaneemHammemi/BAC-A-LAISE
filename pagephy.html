@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physique - Résumés PDF</title>
+    <link rel="stylesheet" href="subjetcstyle.css" />
+    <!-- FontAwesome for modern icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Return
+      </a>
+      <h1 class="nav-title">Physique/Chimie</h1>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un chapitre..."
+          onkeyup="filterPDFs()"
+        />
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-layout">
+      <!-- Sidebar: PDF Chapters List -->
+      <aside class="pdf-sidebar">
+        <div class="sidebar-header">
+          <h3>
+            <i class="fa-solid fa-atom fa-spin" style="color: #ffb703; margin-right: 8px; --fa-animation-duration: 8s;"></i>Chapitres & Résumés
+          </h3>
+        </div>
+
+        <div class="pdf-list" id="pdfList">
+          <!-- Unit 1 -->
+          <div class="unit-group">
+            <span class="unit-label">Physique</span>
+
+            <button
+              class="pdf-item active"
+              onclick="loadPDF('pdf/condo.pdf', 'Condensateur', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Condensateur</span>
+                <span class="pdf-size">PDF • 1.2 MB</span>
+              </div>
+            </button>
+
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/RC.pdf', 'Dipole RC', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Dipole RC</span>
+                <span class="pdf-size">PDF • 850 KB</span>
+              </div>
+            </button>
+
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/bob.pdf', 'Bobine', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Bobine</span>
+                <span class="pdf-size">PDF • 1.1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/RL.pdf', 'Dipole RL', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Dipole RL</span>
+                <span class="pdf-size">PDF • 1.4 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/LC.pdf', 'Circuit LC', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Circuit LC</span>
+                <span class="pdf-size">PDF • 1.8 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/RLC.pdf', 'Circuit RLC', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Circuit RLC</span>
+                <span class="pdf-size">PDF • 2.1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/force.pdf', 'Forcé', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Forcé</span>
+                <span class="pdf-size">PDF • 1.6 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/ent.pdf', 'Entretien', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Entretien</span>
+                <span class="pdf-size">PDF • 1.3 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/filt.pdf', 'Filtres', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Filtres</span>
+                <span class="pdf-size">PDF • 2.5 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/multi.pdf', 'Multivibrateur', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Multivibrateur</span>
+                <span class="pdf-size">PDF • 1.9 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/conv.pdf', 'Convertisseur', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Convertisseur</span>
+                <span class="pdf-size">PDF • 2.2 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/onde.pdf', 'Onde', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Onde</span>
+                <span class="pdf-size">PDF • 3.1 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/inter.pdf', 'Intéraction Onde-Matière', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Intéraction Onde-Matière</span>
+                <span class="pdf-size">PDF • 2.8 MB</span>
+              </div>
+            </button>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/mod.pdf', 'Modulation/Démodulation', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Modulation/Démodulation</span>
+                <span class="pdf-size">PDF • 3.2 MB</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Unit 2 -->
+          <div class="unit-group">
+            <span class="unit-label">Chimie</span>
+
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/quant.pdf', 'Quantité de matière', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Quantité de matière</span>
+                <span class="pdf-size">PDF • 980 KB</span>
+              </div>
+            </button>
+            
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/elec.pdf', 'Electrolyse', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Electrolyse</span>
+                <span class="pdf-size">PDF • 1.1 MB</span>
+              </div>
+            </button>
+            
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/pile.pdf', 'Pile Daniell', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Pile Daniell</span>
+                <span class="pdf-size">PDF • 1.3 MB</span>
+              </div>
+            </button>
+            
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/cond.pdf', 'Conductance', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Conductance</span>
+                <span class="pdf-size">PDF • 750 KB</span>
+              </div>
+            </button>
+            
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/alcool.pdf', 'Alcools', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Alcools</span>
+                <span class="pdf-size">PDF • 1.5 MB</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="unit-group">
+            <span class="unit-label">Autres</span>
+            <button
+              class="pdf-item"
+              onclick="loadPDF('pdf/def.pdf', 'Définitions', this)"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="pdf-info">
+                <span class="pdf-name">Définitions</span>
+                <span class="pdf-size">PDF • 620 KB</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content: PDF Viewer Header + Embed -->
+      <main class="viewer-container">
+        <div class="viewer-header">
+          <h2 id="currentTitle">Condensateur</h2>
+          <div class="viewer-actions">
+            <a
+              id="downloadBtn"
+              href="pdf/condo.pdf"
+              download
+              class="action-btn"
+            >
+              <i class="fa-solid fa-download"></i> Télécharger
+            </a>
+            <a
+              id="fullscreenBtn"
+              href="pdf/condo.pdf"
+              target="_blank"
+              class="action-btn secondary"
+            >
+              <i class="fa-solid fa-expand"></i> Plein écran
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded PDF Viewer -->
+        <div class="iframe-wrapper">
+          <iframe id="pdfFrame" src="pdf/condo.pdf" frameborder="0"></iframe>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Load dynamic PDF into viewer
+      function loadPDF(pdfUrl, title, element) {
+        document.getElementById("pdfFrame").src = pdfUrl;
+        document.getElementById("currentTitle").textContent = title;
+        document.getElementById("downloadBtn").href = pdfUrl;
+        document.getElementById("fullscreenBtn").href = pdfUrl;
+
+        // Update active state in sidebar
+        let items = document.querySelectorAll(".pdf-item");
+        items.forEach((item) => item.classList.remove("active"));
+        element.classList.add("active");
+      }
+
+      // Filter PDFs via search input
+      function filterPDFs() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let pdfItems = document.querySelectorAll(".pdf-item");
+
+        pdfItems.forEach((item) => {
+          let text = item.querySelector(".pdf-name").textContent.toLowerCase();
+          if (text.includes(input)) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

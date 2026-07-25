@@ -1,0 +1,18 @@
+.bento-btn {
+  align-self: flex-start;
+  margin-top: 1.5rem;
+  background: #ffffff;
+  color: var(--text-dark);
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none; /* Prevents underline on link tags */
+}
